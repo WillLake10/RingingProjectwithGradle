@@ -37,4 +37,7 @@ task runPopulateDatabase(group: 'run', type: JavaExec) {
     main = 'data/populateDatabase'
 }
 
-
+task runBuildDatabase(group: 'run', type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'data/DatabaseBuild'
+}
