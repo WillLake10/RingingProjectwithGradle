@@ -16,15 +16,17 @@ public class JdbcMethodDao implements MethodDao {
 
     private JdbcTemplate jdbcTemplate;
 
-    public void setDataSource (DataSource dataSource) {this.jdbcTemplate = new JdbcTemplate(dataSource);}
+    public void setDataSource(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }
 
     private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public void addMethod(Method method) {
         this.jdbcTemplate.update(
-                "insert into method(method_id, name, title, notation, stage, classification, lengthOfLead, numberOfHunts, leadHead, leadHeadCode, symmetry, notes) values (?,?,?,?,?,?,?,?,?,?,?,?)",
-                method.getID(), method.getName(), method.getTitle(), method.getNotation(), method.getStage(), method.getClassification(), method.getLengthOfLead(), method.getNumberOfHunts(), method.getLeadHead(), method.getLeadHeadCode(), method.getSymmetry(), method.getNotes()
+                "insert into method(methodId, name, title, notation, stage, classification, lengthOfLead, numberOfHunts, leadHead, leadHeadCode, symmetry, notes) values (?,?,?,?,?,?,?,?,?,?,?,?)",
+                method.getMethodId(), method.getName(), method.getTitle(), method.getNotation(), method.getStage(), method.getClassification(), method.getLengthOfLead(), method.getNumberOfHunts(), method.getLeadHead(), method.getLeadHeadCode(), method.getSymmetry(), method.getNotes()
         );
     }
 
@@ -32,7 +34,6 @@ public class JdbcMethodDao implements MethodDao {
     public Set<Method> getAllMethod() {
         final List<Method> results = this.jdbcTemplate.query("select * from method",
                 new BeanPropertyRowMapper<>(Method.class));
-
         return new HashSet<>(results);
     }
 }

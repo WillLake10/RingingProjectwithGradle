@@ -1,7 +1,7 @@
 package data.dto;
 
 public class Method {
-    private String ID;
+    private String methodId;
     private String name;
     private String title;
     private String notation;
@@ -25,7 +25,7 @@ public class Method {
         this.name = "";
         this.title = "";
         this.notation = "";
-        this.ID = "";
+        this.methodId = "";
         this.notes = "";
     }
 
@@ -40,7 +40,7 @@ public class Method {
         this.name = name;
         this.title = title;
         this.notation = notation;
-        this.ID = ID;
+        this.methodId = ID;
         this.notes = notes;
     }
 
@@ -124,12 +124,12 @@ public class Method {
         this.notation = notation;
     }
 
-    public String getID() {
-        return ID;
+    public String getMethodId() {
+        return methodId;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setMethodId(String methodId) {
+        this.methodId = methodId;
     }
 
     public String getNotes() {
@@ -143,7 +143,7 @@ public class Method {
     @Override
     public String toString() {
         return "Method{" +
-                "ID='" + ID + '\'' +
+                "ID='" + methodId + '\'' +
                 ", name='" + name + '\'' +
                 ", title='" + title + '\'' +
                 ", notation='" + notation + '\'' +

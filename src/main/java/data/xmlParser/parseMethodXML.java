@@ -160,7 +160,7 @@ public class parseMethodXML {
             } catch (Exception e) {
             }
             try {
-                method.setID(element.getAttribute("id"));
+                method.setMethodId(element.getAttribute("id"));
             } catch (Exception e) {
             }
             method.setNotes(notes);
