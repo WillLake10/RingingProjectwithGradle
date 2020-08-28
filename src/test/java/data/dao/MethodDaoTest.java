@@ -61,4 +61,144 @@ public class MethodDaoTest {
         assertEquals("m14065", method.getMethodId());
         assertEquals("Bob Cinques methods with a lead length of 22 and 1 hunt bell", method.getNotes());
     }
+
+    @Test
+    public void canSearchAllFieldsTitle(){
+        methodDao.addMethod(new Method("Bob",
+                11,
+                22,
+                1,
+                "135274068E9",
+                "",
+                "palindromic",
+                "Plain",
+                "Plain Bob Cinques",
+                "E.1.E.1.E.1.E.1.E.1.E,12E",
+                "m14065",
+                "Bob Cinques methods with a lead length of 22 and 1 hunt bell"));
+        methodDao.addMethod(new Method("Surprise",
+                10,
+                40,
+                1,
+                "1573920486",
+                "b",
+                "palindromic",
+                "Braunstone",
+                "Braunstone Surprise Royal",
+                "-30-14-50-16-1270-38-14-50.78.16.78.90,12",
+                "m21366",
+                "Surprise Royal methods with a lead length of 40 and 1 hunt bell"));
+
+        Set<Method> allMethods = methodDao.fullFieldSearch("Plain Bob");
+        assertNotNull(allMethods);
+        assertEquals(1, allMethods.size());
+
+        Method method = Iterables.getOnlyElement(allMethods);
+        log.info("Found Evening [{}]", method.toString());
+        assertEquals("Bob", method.getClassification());
+        assertEquals(11, method.getStage());
+        assertEquals(22, method.getLengthOfLead());
+        assertEquals(1, method.getNumberOfHunts());
+        assertEquals("135274068E9", method.getLeadHead());
+        assertEquals("", method.getLeadHeadCode());
+        assertEquals("palindromic", method.getSymmetry());
+        assertEquals("Plain", method.getName());
+        assertEquals("Plain Bob Cinques", method.getTitle());
+        assertEquals("E.1.E.1.E.1.E.1.E.1.E,12E", method.getNotation());
+        assertEquals("m14065", method.getMethodId());
+        assertEquals("Bob Cinques methods with a lead length of 22 and 1 hunt bell", method.getNotes());
+
+    }
+
+    @Test
+    public void canSearchAllFieldsStage(){
+        methodDao.addMethod(new Method("Bob",
+                11,
+                22,
+                1,
+                "135274068E9",
+                "",
+                "palindromic",
+                "Plain",
+                "Plain Bob Cinques",
+                "E.1.E.1.E.1.E.1.E.1.E,12E",
+                "m14065",
+                "Bob Cinques methods with a lead length of 22 and 1 hunt bell"));
+        methodDao.addMethod(new Method("Surprise",
+                10,
+                40,
+                1,
+                "1573920486",
+                "b",
+                "palindromic",
+                "Braunstone",
+                "Braunstone Surprise Royal",
+                "-30-14-50-16-1270-38-14-50.78.16.78.90,12",
+                "m21366",
+                "Surprise Royal methods with a lead length of 40 and 1 hunt bell"));
+
+        Set<Method> allMethods = methodDao.fullFieldSearch("11");
+        assertNotNull(allMethods);
+        assertEquals(1, allMethods.size());
+
+        Method method = Iterables.getOnlyElement(allMethods);
+        log.info("Found Evening [{}]", method.toString());
+        assertEquals("Bob", method.getClassification());
+        assertEquals(11, method.getStage());
+        assertEquals(22, method.getLengthOfLead());
+        assertEquals(1, method.getNumberOfHunts());
+        assertEquals("135274068E9", method.getLeadHead());
+        assertEquals("", method.getLeadHeadCode());
+        assertEquals("palindromic", method.getSymmetry());
+        assertEquals("Plain", method.getName());
+        assertEquals("Plain Bob Cinques", method.getTitle());
+        assertEquals("E.1.E.1.E.1.E.1.E.1.E,12E", method.getNotation());
+        assertEquals("m14065", method.getMethodId());
+        assertEquals("Bob Cinques methods with a lead length of 22 and 1 hunt bell", method.getNotes());
+
+    }
+
+    @Test
+    public void canGetMethodsForStage(){
+        methodDao.addMethod(new Method("Bob",
+                11,
+                22,
+                1,
+                "135274068E9",
+                "",
+                "palindromic",
+                "Plain",
+                "Plain Bob Cinques",
+                "E.1.E.1.E.1.E.1.E.1.E,12E",
+                "m14065",
+                "Bob Cinques methods with a lead length of 22 and 1 hunt bell"));
+        methodDao.addMethod(new Method("Surprise",
+                10,
+                40,
+                1,
+                "1573920486",
+                "b",
+                "palindromic",
+                "Braunstone",
+                "Braunstone Surprise Royal",
+                "-30-14-50-16-1270-38-14-50.78.16.78.90,12",
+                "m21366",
+                "Surprise Royal methods with a lead length of 40 and 1 hunt bell"));
+        methodDao.addMethod(new Method("Surprise",
+                10,
+                40,
+                1,
+                "1573920486",
+                "b",
+                "palindromic",
+                "Cambridge",
+                "Cambridge Surprise Royal",
+                "x30x14x1250x36x1470x58x16x70x18x90,12",
+                "m21365",
+                "Surprise Royal methods with a lead length of 40 and 1 hunt bell"));
+
+        Set<Method> allMethods = methodDao.getMethodsForStage(10);
+        assertNotNull(allMethods);
+        assertEquals(2, allMethods.size());
+    }
 }

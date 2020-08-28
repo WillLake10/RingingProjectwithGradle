@@ -36,4 +36,33 @@ public class JdbcMethodDao implements MethodDao {
                 new BeanPropertyRowMapper<>(Method.class));
         return new HashSet<>(results);
     }
+
+    @Override
+    public Set<Method> fullFieldSearch(String searchTerm) {
+        final List<Method> result = this.jdbcTemplate.query("select * from method " +
+                        "where lower(name) like '%' || lower(?) || '%' or " +
+                        "lower(title) like '%' || lower(?) || '%' or " +
+                        "lower(notation) like '%' || lower(?) || '%' or " +
+                        "lower(stage) like '%' || lower(?) || '%' or " +
+                        "lower(classification) like '%' || lower(?) || '%' or " +
+                        "lower(lengthOfLead) like '%' || lower(?) || '%' or " +
+                        "lower(numberOfHunts) like '%' || lower(?) || '%' or " +
+                        "lower(leadHead) like '%' || lower(?) || '%' or " +
+                        "lower(leadHeadCode) like '%' || lower(?) || '%' or " +
+                        "lower(symmetry) like '%' || lower(?) || '%' or " +
+                        "lower(notes) like '%' || lower(?) || '%'",
+                new Object[] {searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm},
+                new BeanPropertyRowMapper<>(Method.class));
+        return new HashSet<>(result);
+    }
+
+    @Override
+    public Set<Method> getMethodsForStage(int stage) {
+        final List<Method> result = this.jdbcTemplate.query("select * from method " +
+                        "where lower(stage) like '%' || lower(?) || '%'",
+                new Object[] {stage},
+                new BeanPropertyRowMapper<>(Method.class));
+        return new HashSet<>(result);
+    }
+
 }

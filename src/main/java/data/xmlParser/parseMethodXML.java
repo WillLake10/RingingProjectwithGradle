@@ -1,6 +1,7 @@
 package data.xmlParser;
 
 
+import data.dao.MethodDao;
 import data.dto.Method;
 import data.xmlParser.dto.PropertiesDto;
 import org.w3c.dom.Document;
@@ -15,8 +16,12 @@ import java.io.File;
 import static data.xmlParser.XmlUtil.asList;
 
 public class parseMethodXML {
+
+
+
     public static void main() {
         try {
+            MethodDao methodDao = null;
             File importFile = new File("src/main/resources/CCCBR_methods.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -40,6 +45,7 @@ public class parseMethodXML {
                     for(Node methodNode: asList(methods)) {
                         methodNo++;
                         Method method = getMethod(methodNode, propertiesDto, notes);
+                        methodDao.addMethod(method);
                         System.out.println(method.toString());
                     }
                 }
