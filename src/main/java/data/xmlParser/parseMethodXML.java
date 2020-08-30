@@ -15,13 +15,17 @@ import java.io.File;
 
 import static data.xmlParser.XmlUtil.asList;
 
-public class parseMethodXML {
+public class parseMethodXML implements Runnable{
 
+    private MethodDao methodDao;
 
+    @Override
+    public void run() {
+        main();
+    }
 
-    public static void main() {
+    public void main() {
         try {
-            MethodDao methodDao = null;
             File importFile = new File("src/main/resources/CCCBR_methods.xml");
             DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -57,7 +61,7 @@ public class parseMethodXML {
 
     }
 
-    public static PropertiesDto getProperties(Node propertiesNode) {
+    public PropertiesDto getProperties(Node propertiesNode) {
         PropertiesDto propertiesDto = new PropertiesDto();
         if (propertiesNode.getNodeType() == Node.ELEMENT_NODE) {
             Element element = (Element) propertiesNode;
@@ -93,7 +97,7 @@ public class parseMethodXML {
         return propertiesDto;
     }
 
-    public static Method getMethod(Node methodsNode, PropertiesDto propertiesDto, String notes) {
+    public Method getMethod(Node methodsNode, PropertiesDto propertiesDto, String notes) {
         Method method = new Method();
         if (methodsNode.getNodeType() == Node.ELEMENT_NODE) {
             Element element = (Element) methodsNode;

@@ -28,6 +28,7 @@ public class JdbcMethodDao implements MethodDao {
                 "insert into method(methodId, name, title, notation, stage, classification, lengthOfLead, numberOfHunts, leadHead, leadHeadCode, symmetry, notes) values (?,?,?,?,?,?,?,?,?,?,?,?)",
                 method.getMethodId(), method.getName(), method.getTitle(), method.getNotation(), method.getStage(), method.getClassification(), method.getLengthOfLead(), method.getNumberOfHunts(), method.getLeadHead(), method.getLeadHeadCode(), method.getSymmetry(), method.getNotes()
         );
+        log.info(method.toString() + " addded to 'method' table");
     }
 
     @Override
