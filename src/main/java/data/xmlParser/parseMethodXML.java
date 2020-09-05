@@ -1,6 +1,5 @@
 package data.xmlParser;
 
-
 import data.dao.MethodDao;
 import data.dto.Method;
 import data.xmlParser.dto.PropertiesDto;
