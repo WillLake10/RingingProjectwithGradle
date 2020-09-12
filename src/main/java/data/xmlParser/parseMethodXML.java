@@ -176,4 +176,8 @@ public class parseMethodXML implements Runnable{
         }
         return method;
     }
+
+    public void setMethodDao(MethodDao methodDao) {
+        this.methodDao = methodDao;
+    }
 }
