@@ -13,4 +13,6 @@ public interface MethodDao {
     Set<Method> fullFieldSearch(String searchTerm);
 
     Set<Method> getMethodsForStage(int stage);
+
+    Set<Method> getMethodsForStageAndName(String name, int stage);
 }

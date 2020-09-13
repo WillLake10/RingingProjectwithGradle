@@ -201,4 +201,48 @@ public class MethodDaoTest {
         assertNotNull(allMethods);
         assertEquals(2, allMethods.size());
     }
+
+    @Test
+    public void canSearchMethodsByNameAndStage(){
+        methodDao.addMethod(new Method("Bob",
+                11,
+                22,
+                1,
+                "135274068E9",
+                "",
+                "palindromic",
+                "Plain",
+                "Plain Bob Cinques",
+                "E.1.E.1.E.1.E.1.E.1.E,12E",
+                "m14065",
+                "Bob Cinques methods with a lead length of 22 and 1 hunt bell"));
+        methodDao.addMethod(new Method("Surprise",
+                10,
+                40,
+                1,
+                "1573920486",
+                "b",
+                "palindromic",
+                "Braunstone",
+                "Braunstone Surprise Royal",
+                "-30-14-50-16-1270-38-14-50.78.16.78.90,12",
+                "m21366",
+                "Surprise Royal methods with a lead length of 40 and 1 hunt bell"));
+        methodDao.addMethod(new Method("Surprise",
+                10,
+                40,
+                1,
+                "1573920486",
+                "b",
+                "palindromic",
+                "Cambridge",
+                "Cambridge Surprise Royal",
+                "x30x14x1250x36x1470x58x16x70x18x90,12",
+                "m21365",
+                "Surprise Royal methods with a lead length of 40 and 1 hunt bell"));
+
+        Set<Method> searchResults = methodDao.getMethodsForStageAndName("Cambridge", 10);
+        assertNotNull(searchResults);
+        assertEquals(1, searchResults.size());
+    }
 }

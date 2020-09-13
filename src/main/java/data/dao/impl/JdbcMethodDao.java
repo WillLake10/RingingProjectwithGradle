@@ -66,4 +66,15 @@ public class JdbcMethodDao implements MethodDao {
         return new HashSet<>(result);
     }
 
+    @Override
+    public Set<Method> getMethodsForStageAndName(String name, int stage) {
+        final List<Method> result = this.jdbcTemplate.query("select * from method " +
+                        "where lower(stage) like '%' || lower(?) || '%' and " +
+                        "(lower(title) like '%' || lower(?) || '%' or " +
+                        "lower(name) like '%' || lower(?) || '%')",
+                new Object[] {stage, name, name},
+                new BeanPropertyRowMapper<>(Method.class));
+        return new HashSet<>(result);
+    }
+
 }
