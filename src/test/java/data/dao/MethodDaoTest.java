@@ -16,8 +16,8 @@ import java.util.Set;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-@RunWith(SpringJUnit4ClassRunner.class )
-@ContextConfiguration(locations={"/spring/testCtx-data.xml"})
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"/spring/testCtx-data.xml"})
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class MethodDaoTest {
 
@@ -27,7 +27,7 @@ public class MethodDaoTest {
     private MethodDao methodDao;
 
     @Test
-    public void canCreateandRetreveMethod(){
+    public void canCreateandRetreveMethod() {
         Method inMethod = new Method("Bob",
                 11,
                 22,
@@ -63,7 +63,7 @@ public class MethodDaoTest {
     }
 
     @Test
-    public void canSearchAllFieldsTitle(){
+    public void canSearchAllFieldsTitle() {
         methodDao.addMethod(new Method("Bob",
                 11,
                 22,
@@ -111,7 +111,7 @@ public class MethodDaoTest {
     }
 
     @Test
-    public void canSearchAllFieldsStage(){
+    public void canSearchAllFieldsStage() {
         methodDao.addMethod(new Method("Bob",
                 11,
                 22,
@@ -159,7 +159,7 @@ public class MethodDaoTest {
     }
 
     @Test
-    public void canGetMethodsForStage(){
+    public void canGetMethodsForStage() {
         methodDao.addMethod(new Method("Bob",
                 11,
                 22,
@@ -203,7 +203,7 @@ public class MethodDaoTest {
     }
 
     @Test
-    public void canSearchMethodsByNameAndStage(){
+    public void canSearchMethodsByNameAndStage() {
         methodDao.addMethod(new Method("Bob",
                 11,
                 22,
@@ -244,5 +244,41 @@ public class MethodDaoTest {
         Set<Method> searchResults = methodDao.getMethodsForStageAndName("Cambridge", 10);
         assertNotNull(searchResults);
         assertEquals(1, searchResults.size());
+    }
+
+    @Test
+    public void canSearchMethodsByName() {
+        methodDao.addMethod(new Method("Surprise",
+                10,
+                40,
+                1,
+                "1573920486",
+                "b",
+                "palindromic",
+                "Braunstone",
+                "Braunstone Surprise Royal",
+                "-30-14-50-16-1270-38-14-50.78.16.78.90,12",
+                "m21366",
+                "Surprise Royal methods with a lead length of 40 and 1 hunt bell"));
+        methodDao.addMethod(new Method("Surprise",
+                10,
+                40,
+                1,
+                "1573920486",
+                "b",
+                "palindromic",
+                "Cambridge",
+                "Cambridge Surprise Royal",
+                "x30x14x1250x36x1470x58x16x70x18x90,12",
+                "m21365",
+                "Surprise Royal methods with a lead length of 40 and 1 hunt bell"));
+
+        Set<Method> searchResults = methodDao.getMethodsForName("Cambridge");
+        assertNotNull(searchResults);
+        assertEquals(1, searchResults.size());
+
+        Method method = Iterables.getOnlyElement(searchResults);
+        log.info("Found Evening [{}]", method.toString());
+        assertEquals("Cambridge Surprise Royal", method.getTitle());
     }
 }

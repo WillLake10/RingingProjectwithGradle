@@ -1,5 +1,6 @@
 create table method (
-    methodId varchar(8) not null,
+    methodId bigint auto_increment not null,
+    CCCBRID varchar(8) not null,
     name varchar(128),
     title varchar(128) not null,
     notation varchar(1024) not null,

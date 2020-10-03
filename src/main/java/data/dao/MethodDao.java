@@ -15,4 +15,6 @@ public interface MethodDao {
     Set<Method> getMethodsForStage(int stage);
 
     Set<Method> getMethodsForStageAndName(String name, int stage);
+
+    Set<Method> getMethodsForName(String name);
 }

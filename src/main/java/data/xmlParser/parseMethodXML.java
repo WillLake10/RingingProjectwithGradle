@@ -3,6 +3,8 @@ package data.xmlParser;
 import data.dao.MethodDao;
 import data.dto.Method;
 import data.xmlParser.dto.PropertiesDto;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -17,6 +19,8 @@ import static data.xmlParser.XmlUtil.asList;
 public class parseMethodXML implements Runnable{
 
     private MethodDao methodDao;
+
+    private final Logger log = LogManager.getLogger(this.getClass());
 
     @Override
     public void run() {
@@ -49,11 +53,11 @@ public class parseMethodXML implements Runnable{
                         methodNo++;
                         Method method = getMethod(methodNode, propertiesDto, notes);
                         methodDao.addMethod(method);
-                        System.out.println(method.toString());
+                        //System.out.println(method.toString());
                     }
                 }
             }
-            System.out.println(methodNo);
+            log.info(methodNo + " methods added to database");
         } catch (Exception e) {
             e.printStackTrace();
         }

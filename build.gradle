@@ -20,10 +20,9 @@ dependencies {
     compile (group: 'org.springframework', name: 'spring-orm', version: '4.3.12.RELEASE')
 
     // Logging
-    compile 'org.slf4j:slf4j-api:1.7.30'
-    runtime 'org.apache.logging.log4j:log4j-core:2.13.3'
-    runtime 'org.apache.logging.log4j:log4j-slf4j-impl:2.13.3'
-    runtime 'org.apache.logging.log4j:log4j-jcl:2.13.3' //Needed for Spring
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.13.3'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.13.3'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-jcl', version: '2.13.3' //Needed for Spring
 
     // General
     compile group: 'com.google.guava', name: 'guava', version: '23.0'
@@ -42,4 +41,9 @@ task runPopulateDatabase(group: 'run', type: JavaExec) {
 task runBuildDatabase(group: 'run', type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
     main = 'data/DatabaseBuild'
+}
+
+task runApplication(group: 'run', type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'runMain'
 }

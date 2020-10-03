@@ -2,8 +2,9 @@ package data.dao.impl;
 
 import data.dto.Method;
 import data.dao.MethodDao;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -20,15 +21,15 @@ public class JdbcMethodDao implements MethodDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
+    private final Logger log = LogManager.getLogger(this.getClass());
 
     @Override
     public void addMethod(Method method) {
         this.jdbcTemplate.update(
-                "insert into method(methodId, name, title, notation, stage, classification, lengthOfLead, numberOfHunts, leadHead, leadHeadCode, symmetry, notes) values (?,?,?,?,?,?,?,?,?,?,?,?)",
+                "insert into method(CCCBRID, name, title, notation, stage, classification, lengthOfLead, numberOfHunts, leadHead, leadHeadCode, symmetry, notes) values (?,?,?,?,?,?,?,?,?,?,?,?)",
                 method.getMethodId(), method.getName(), method.getTitle(), method.getNotation(), method.getStage(), method.getClassification(), method.getLengthOfLead(), method.getNumberOfHunts(), method.getLeadHead(), method.getLeadHeadCode(), method.getSymmetry(), method.getNotes()
         );
-        log.info(method.toString() + " addded to 'method' table");
+        log.info(method.toString() + " added to 'method' table");
     }
 
     @Override
@@ -52,7 +53,7 @@ public class JdbcMethodDao implements MethodDao {
                         "lower(leadHeadCode) like '%' || lower(?) || '%' or " +
                         "lower(symmetry) like '%' || lower(?) || '%' or " +
                         "lower(notes) like '%' || lower(?) || '%'",
-                new Object[] {searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm},
+                new Object[]{searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm, searchTerm},
                 new BeanPropertyRowMapper<>(Method.class));
         return new HashSet<>(result);
     }
@@ -61,7 +62,7 @@ public class JdbcMethodDao implements MethodDao {
     public Set<Method> getMethodsForStage(int stage) {
         final List<Method> result = this.jdbcTemplate.query("select * from method " +
                         "where lower(stage) like '%' || lower(?) || '%'",
-                new Object[] {stage},
+                new Object[]{stage},
                 new BeanPropertyRowMapper<>(Method.class));
         return new HashSet<>(result);
     }
@@ -72,7 +73,16 @@ public class JdbcMethodDao implements MethodDao {
                         "where lower(stage) like '%' || lower(?) || '%' and " +
                         "(lower(title) like '%' || lower(?) || '%' or " +
                         "lower(name) like '%' || lower(?) || '%')",
-                new Object[] {stage, name, name},
+                new Object[]{stage, name, name},
+                new BeanPropertyRowMapper<>(Method.class));
+        return new HashSet<>(result);
+    }
+
+    @Override
+    public Set<Method> getMethodsForName(String name) {
+        final List<Method> result = this.jdbcTemplate.query("select * from method " +
+                        "where lower(title) like '%' || lower(?) || '%'",
+                new Object[]{name},
                 new BeanPropertyRowMapper<>(Method.class));
         return new HashSet<>(result);
     }
