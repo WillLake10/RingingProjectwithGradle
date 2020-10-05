@@ -8,9 +8,9 @@ import java.util.Set;
 
 public class methodGen {
 
-    private MethodDao methodDao;
+    private static MethodDao methodDao;
 
-    public Method getMethodFromUser() {
+    public static Method getMethodFromUser() {
         Method method = new Method();
         if (useMethodFromDB()) {
             method = getMethodFromDB();
@@ -18,7 +18,7 @@ public class methodGen {
         return method;
     }
 
-    private Method getMethodFromDB() {
+    private static Method getMethodFromDB() {
         System.out.print("Enter method name: ");
         String methodName = userInput.getStringInput();
         System.out.print("Do you want to search by number of bells as well(y/n): ");

@@ -9,12 +9,10 @@
        default-autowire="byType"
 >
 
-
     <import resource="classpath*:/spring/appCtx-database.xml"/>
 
     <context:property-placeholder location="RingingProjectwithGradle.properties"/>
 
-    <bean class="data.xmlParser.parseMethodXML"/>
-
+    <bean class="ringing"/>
 
 </beans>

@@ -173,7 +173,7 @@ public class parseMethodXML implements Runnable{
             } catch (Exception e) {
             }
             try {
-                method.setMethodId(element.getAttribute("id"));
+                method.setCCCBRID(element.getAttribute("id"));
             } catch (Exception e) {
             }
             method.setNotes(notes);

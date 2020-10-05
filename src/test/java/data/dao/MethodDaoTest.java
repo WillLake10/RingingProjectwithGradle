@@ -2,10 +2,10 @@ package data.dao;
 
 import com.google.common.collect.Iterables;
 import data.dto.Method;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
@@ -21,7 +21,7 @@ import static org.junit.Assert.assertNotNull;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class MethodDaoTest {
 
-    private final Logger log = LoggerFactory.getLogger(this.getClass());
+    private final Logger log = LogManager.getLogger(this.getClass());
 
     @Autowired
     private MethodDao methodDao;
@@ -58,7 +58,7 @@ public class MethodDaoTest {
         assertEquals("Plain", method.getName());
         assertEquals("Plain Bob Cinques", method.getTitle());
         assertEquals("E.1.E.1.E.1.E.1.E.1.E,12E", method.getNotation());
-        assertEquals("m14065", method.getMethodId());
+        assertEquals("m14065", method.getCCCBRID());
         assertEquals("Bob Cinques methods with a lead length of 22 and 1 hunt bell", method.getNotes());
     }
 
@@ -105,7 +105,7 @@ public class MethodDaoTest {
         assertEquals("Plain", method.getName());
         assertEquals("Plain Bob Cinques", method.getTitle());
         assertEquals("E.1.E.1.E.1.E.1.E.1.E,12E", method.getNotation());
-        assertEquals("m14065", method.getMethodId());
+        assertEquals("m14065", method.getCCCBRID());
         assertEquals("Bob Cinques methods with a lead length of 22 and 1 hunt bell", method.getNotes());
 
     }
@@ -153,7 +153,7 @@ public class MethodDaoTest {
         assertEquals("Plain", method.getName());
         assertEquals("Plain Bob Cinques", method.getTitle());
         assertEquals("E.1.E.1.E.1.E.1.E.1.E,12E", method.getNotation());
-        assertEquals("m14065", method.getMethodId());
+        assertEquals("m14065", method.getCCCBRID());
         assertEquals("Bob Cinques methods with a lead length of 22 and 1 hunt bell", method.getNotes());
 
     }

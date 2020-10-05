@@ -27,7 +27,7 @@ public class JdbcMethodDao implements MethodDao {
     public void addMethod(Method method) {
         this.jdbcTemplate.update(
                 "insert into method(CCCBRID, name, title, notation, stage, classification, lengthOfLead, numberOfHunts, leadHead, leadHeadCode, symmetry, notes) values (?,?,?,?,?,?,?,?,?,?,?,?)",
-                method.getMethodId(), method.getName(), method.getTitle(), method.getNotation(), method.getStage(), method.getClassification(), method.getLengthOfLead(), method.getNumberOfHunts(), method.getLeadHead(), method.getLeadHeadCode(), method.getSymmetry(), method.getNotes()
+                method.getCCCBRID(), method.getName(), method.getTitle(), method.getNotation(), method.getStage(), method.getClassification(), method.getLengthOfLead(), method.getNumberOfHunts(), method.getLeadHead(), method.getLeadHeadCode(), method.getSymmetry(), method.getNotes()
         );
         log.info(method.toString() + " added to 'method' table");
     }

@@ -1,7 +1,7 @@
 package data.dto;
 
 public class Method {
-    private String methodId;
+    private String CCCBRID;
     private String name;
     private String title;
     private String notation;
@@ -25,7 +25,7 @@ public class Method {
         this.name = "";
         this.title = "";
         this.notation = "";
-        this.methodId = "";
+        this.CCCBRID = "";
         this.notes = "";
     }
 
@@ -40,7 +40,7 @@ public class Method {
         this.name = name;
         this.title = title;
         this.notation = notation;
-        this.methodId = ID;
+        this.CCCBRID = ID;
         this.notes = notes;
     }
 
@@ -124,12 +124,12 @@ public class Method {
         this.notation = notation;
     }
 
-    public String getMethodId() {
-        return methodId;
+    public String getCCCBRID() {
+        return CCCBRID;
     }
 
-    public void setMethodId(String methodId) {
-        this.methodId = methodId;
+    public void setCCCBRID(String CCCBRID) {
+        this.CCCBRID = CCCBRID;
     }
 
     public String getNotes() {
@@ -143,7 +143,7 @@ public class Method {
     @Override
     public String toString() {
         return "Method{" +
-                "ID='" + methodId + '\'' +
+                "ID='" + CCCBRID + '\'' +
                 ", name='" + name + '\'' +
                 ", title='" + title + '\'' +
                 ", notation='" + notation + '\'' +
